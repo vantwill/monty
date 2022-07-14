@@ -15,6 +15,7 @@ void _push(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+
 	top->n = var_global.push_arg;
 	top->next = *stack;
 	top->prev = NULL;
@@ -22,6 +23,7 @@ void _push(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 		(*stack)->prev = top;
 	*stack = top;
 }
+
 /**
  * _pall - print all function
  * @stack: pointer to linked list stack
@@ -30,6 +32,7 @@ void _push(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 void _pall(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 {
 	stack_t *runner;
+
 	runner = *stack;
 	while (runner != NULL)
 	{
@@ -47,6 +50,7 @@ void _pall(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 void _pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *runner;
+
 	runner = *stack;
 	if (runner == NULL)
 	{
@@ -55,6 +59,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", runner->n);
 }
+
 /**
  * _pop - remove element a list
  *@stack: pointer to first node
@@ -64,6 +69,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 void _pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *nodo = *stack;
+
 	if (stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
@@ -83,6 +89,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 void free_dlistint(stack_t *head)
 {
 	stack_t *tmp;
+
 	while (head != NULL)
 	{
 		tmp = head->next;
