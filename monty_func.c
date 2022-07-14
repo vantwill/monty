@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * read_file - reads a bytecode file and runs commands
  * @filename: pathname to file
@@ -14,19 +13,21 @@ void read_file(char *filename, stack_t **stack)
 	int check;
 	int read;
 
-	var_global.file = fopen(filename, "r")
+
+	var_global.file = fopen(filename, "r");
+
 	if (var_global.file == NULL)
 	{
-
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
+
 	while ((read = getline(&var_global.buffer, &i, var_global.file)) != -1)
 	{
 		line = parse_line(var_global.buffer, stack, line_count);
 		if (line == NULL || line[0] == '#')
 		{
-			line_count++
+			line_count++;
 			continue;
 		}
 		s = get_op_func(line);
@@ -43,6 +44,7 @@ void read_file(char *filename, stack_t **stack)
 	if (check == -1)
 		exit(-1);
 }
+
 /**
  * get_op_func -  checks opcode and returns the correct function
  * @str: the opcode
@@ -51,6 +53,7 @@ void read_file(char *filename, stack_t **stack)
 instruct_func get_op_func(char *str)
 {
 	int i;
+
 	instruction_t instruct[] = {
 		{"push", _push},
 		{"pall", _pall},
@@ -69,13 +72,16 @@ instruct_func get_op_func(char *str)
 		{"rotr", _rotr},
 		{NULL, NULL},
 	};
+
 	i = 0;
 	while (instruct[i].f != NULL && strcmp(instruct[i].opcode, str) != 0)
 	{
 		i++;
 	}
+
 	return (instruct[i].f);
 }
+
 /**
  * isnumber - checks if a string is a number
  * @str: string being passed
@@ -84,6 +90,7 @@ instruct_func get_op_func(char *str)
 int isnumber(char *str)
 {
 	unsigned int i;
+
 	if (str == NULL)
 		return (0);
 	i = 0;
@@ -100,6 +107,7 @@ int isnumber(char *str)
 	}
 	return (1);
 }
+
 /**
  * parse_line - parses a line for an opcode and arguments
  * @line: the line to be parsed
@@ -111,10 +119,12 @@ char *parse_line(char *line, stack_t **stack, unsigned int line_number)
 {
 	char *op_code, *push, *arg;
 	(void)stack;
+
 	push = "push";
 	op_code = strtok(line, "\n ");
 	if (op_code == NULL)
 		return (NULL);
+
 	if (strcmp(op_code, push) == 0)
 	{
 		arg = strtok(NULL, "\n ");
