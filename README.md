@@ -6,5 +6,4 @@
 
 
 AUTHORS
-	- Kaleab Girma
-	- Gizachew Bayness
+	
